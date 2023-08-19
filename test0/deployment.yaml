@@ -1,23 +1,19 @@
-apiVersion: batch/v1
-kind: Job
+apiVersion: apps/v1
+kind: Deployment
 metadata:
- generateName: app-slack-notification
- annotations:
-  argocd.argoproj.io/hook: PostSync
-  argocd.argoproj.io/hook-delete-policy: HookSucceeded
+  name: myapp
 spec:
+  selector:
+    matchLabels:
+      app: myapp
+  replicas: 2
   template:
+    metadata:
+      labels:
+        app: myapp
     spec:
       containers:
-      - name: slack-notification
-        image: curlimages/curl
-        command:
-        - "curl"
-        - "-X"
-        - "POST"
-        - "--data-urlencode"
-        - "payload={\"channel\": \"#somechannel\", \"username\":
-        \"hello\", \"text\": \"App Sync succeeded\", \"icon_emoji\": \":ghost:\"}"
-        - "https://api.flock.com/hooks/sendMessage/9f12ee72-35dc-44c2-a53c-96cb67c3ca6a"
-      restartPolicy: Never
-  backoffLimit: 2
+      - name: myapp
+        image: nanajanashia/argocd-app:1.2
+        ports:
+        - containerPort: 8080
