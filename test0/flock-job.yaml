@@ -19,7 +19,7 @@ spec:
                 - "-H"
                 - "Content-Type: application/json"
                 - "-d"
-                - '{"text": "Mahendra Post sync hook test2"}'
+                - '{"text": "Post sync hook test"}'
             
             restartPolicy: Never
         backoffLimit: 2
