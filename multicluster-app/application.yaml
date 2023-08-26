@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: myapp-argo-multicluster
+  namespace: multicluster-argo
+spec:
+  project: default #argo project in which this application will be grouped
+  source:
+    repoURL: https://github.com/arbitrarymahi/argocd.git
+    targetRevision: HEAD
+    path: multicluster-app
+  destination: 
+    server: https://kubernetes.default.svc
+    namespace: multicluster-argo
+
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+
+    automated:
+      selfHeal: true
+      prune: true
