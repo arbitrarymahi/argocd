@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: myapp-argo-multicluster
-  namespace: multicluster-argo
+  namespace: argocd
 spec:
   project: default #argo project in which this application will be grouped
   source:
