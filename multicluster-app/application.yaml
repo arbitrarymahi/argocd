@@ -10,7 +10,7 @@ spec:
     targetRevision: HEAD
     path: multicluster-app
   destination: 
-    server: https://kubernetes.default.svc
+    name: gke-c2
     namespace: multicluster-argo
 
   syncPolicy:
