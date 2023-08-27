@@ -19,7 +19,7 @@ spec:
                 - "-H"
                 - "Content-Type: application/json"
                 - "-d"
-                - '{"text": "Post sync hook test"}'
+                - '{"text": "succesfully synced application: myapp"}'
             
             restartPolicy: Never
         backoffLimit: 2
