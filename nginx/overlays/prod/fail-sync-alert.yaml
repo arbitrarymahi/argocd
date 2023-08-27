@@ -4,6 +4,7 @@ metadata:
     generateName: fail-sync-flock-job
     annotations: 
         argocd.argoproj.io/hook: SyncFail
+        argocd.argoproj.io/hook-delete-policy: HookSucceeded, HookFailed
 spec:
     template:
         spec:
