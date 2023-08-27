@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: guestbook-ut
+spec:
+  destination:
+    name: ''
+    namespace: guestbook
+    server: 'https://34.31.156.179'
+  source:
+    path: guestbook
+    repoURL: 'https://github.com/arbitrarymahi/argocd'
+    targetRevision: HEAD
+  sources: []
+  project: default
+  syncPolicy:
+    automated: null
+    syncOptions:
+      - CreateNamespace=true
