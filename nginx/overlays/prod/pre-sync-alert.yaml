@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+    generateName: pre-sync-flock-job
+    annotations: 
+        argocd.argoproj.io/hook: PreSync
+spec:
+    template:
+        spec:
+            containers:
+            - name: flock-msg
+              image: curlimages/curl
+              command:
+                - "curl"
+                - "-X"
+                - "POST"
+                - "https://api.flock.com/hooks/sendMessage/9f12ee72-35dc-44c2-a53c-96cb67c3ca6a"
+                - "-H"
+                - "Content-Type: application/json"
+                - "-d"
+                - '{"text": "syncing prod-nginx app to latest commit"}'
+            
+            restartPolicy: Never
+        backoffLimit: 2
