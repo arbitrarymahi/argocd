@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+    generateName: fail-sync-flock-job
+    annotations: 
+        argocd.argoproj.io/hook: SyncFail
+spec:
+    template:
+        spec:
+            containers:
+            - name: flock-msg
+              image: curlimages/curl
+              command:
+                - "curl"
+                - "-X"
+                - "POST"
+                - "https://api.flock.com/hooks/sendMessage/9f12ee72-35dc-44c2-a53c-96cb67c3ca6a"
+                - "-H"
+                - "Content-Type: application/json"
+                - "-d"
+                - '{"text": "failed to sync the nginx-prod application"}'
+            
+            restartPolicy: Never
+        backoffLimit: 2
